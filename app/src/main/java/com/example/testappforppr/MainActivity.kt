@@ -23,40 +23,98 @@ import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.testappforppr.ui.theme.TestAppForPPRTheme
+import com.google.accompanist.pager.*
+import kotlinx.coroutines.launch
 import java.lang.Float
 import kotlin.math.sqrt
 
 class MainActivity : ComponentActivity() {
+    @ExperimentalMaterialApi
+    @ExperimentalPagerApi
     @ExperimentalFoundationApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            TestAppForPPRTheme {
-                Surface(color = MaterialTheme.colors.background) {
-                    Column() {
-                        Row(
-                            modifier = Modifier
-                                .padding(8.dp)
-                                .fillMaxWidth(), horizontalArrangement = Arrangement.Center
-                        ) {
-                            TextButton(onClick = { /*TODO*/ }) {
-                                Text(text = "Прочтые числа")
-                            }
-                            TextButton(onClick = { /*TODO*/ }) {
-                                Text(text = "Числа Фибоначи")
-                            }
-                        }
-                        MyPrimeNumbers1()
-                    }
-                }
-            }
+            MainScreen()
         }
     }
 }
 
+@ExperimentalMaterialApi
+@ExperimentalFoundationApi
+@ExperimentalPagerApi
+@Composable
+fun MainScreen() {
+    val tabs = listOf(TabItem.PrimeNum, TabItem.FibonacciNum)
+    val pagerState = rememberPagerState(pageCount = tabs.size)
+    Scaffold(topBar = {
+        TopBar()
+    }) {
+        Column() {
+            Tabs(tabs = tabs, pagerState = pagerState)
+            TabsContent(tabs = tabs, pagerState = pagerState)
+        }
+    }
+}
+
+@Composable
+fun TopBar() {
+    TopAppBar(
+        title = {
+            Row(modifier = Modifier.fillMaxWidth()) {
+                Text(
+                    text = "Test App for PPR from Shamsutov Adel",
+                    fontSize = 18.sp,
+                    textAlign = TextAlign.Right,
+                    style = MaterialTheme.typography.body1
+                )
+            }
+        }
+    )
+}
+
+@ExperimentalMaterialApi
+@ExperimentalPagerApi
+@Composable
+fun Tabs(tabs: List<TabItem>, pagerState: PagerState) {
+    val scope = rememberCoroutineScope()
+    TabRow(
+        selectedTabIndex = pagerState.currentPage,
+        indicator = { tabPositions ->
+            TabRowDefaults.Indicator(
+                modifier = Modifier.pagerTabIndicatorOffset(
+                    pagerState = pagerState,
+                    tabPositions = tabPositions
+                ), height = 4.dp, color = Color.Red
+            )
+        }
+    ) {
+        tabs.forEachIndexed { index, tabItem ->
+            LeadingIconTab(
+                icon = {},
+                text = { Text(text = tabItem.title, fontSize = 18.sp,style = MaterialTheme.typography.body1) },
+                selected = pagerState.currentPage == index,
+                onClick = {
+                    scope.launch {
+                        pagerState.animateScrollToPage(index)
+                    }
+                })
+        }
+    }
+}
+
+@ExperimentalPagerApi
+@Composable
+fun TabsContent(tabs: List<TabItem>, pagerState: PagerState) {
+    HorizontalPager(state = pagerState) { page ->
+        tabs[page].screen()
+    }
+}
+
+
 @ExperimentalFoundationApi
 @Composable
-private fun MyPrimeNumbers1() {
+fun MyPrimeNumbers1() {
     var t: ArrayList<Int> = arrayListOf()
 
     fun isPrime(n: Int): Boolean {
@@ -66,9 +124,9 @@ private fun MyPrimeNumbers1() {
         }
         return true
     }
-for(i in 0..100){
-    if (isPrime(i)) t.add(i)
-}
+    for (i in 0..100) {
+        if (isPrime(i)) t.add(i)
+    }
     LazyVerticalGrid(
         cells = GridCells.Fixed(2)
     )
@@ -93,7 +151,7 @@ for(i in 0..100){
 }
 
 @Composable
-private fun MyPrimeNumbers() {
+fun MyPrimeNumbers() {
     var primeNumber = 2
 
     fun isPrime(n: Int): Boolean {
@@ -141,7 +199,7 @@ private fun MyPrimeNumbers() {
 }
 
 @Composable
-private fun MyFiboNumbers() {
+fun MyFibonacciNumbers() {
     var t1: Long = 0
     var t2: Long = 1
 
