@@ -28,12 +28,12 @@ fun PrimeNumbersScreen() {
     }
 }
 
-@ExperimentalFoundationApi
-@Preview(showBackground = true)
-@Composable
-fun PrimeNumbersScreenPreview() {
-    PrimeNumbersScreen()
-}
+//@ExperimentalFoundationApi
+//@Preview(showBackground = true)
+//@Composable
+//fun PrimeNumbersScreenPreview() {
+//    PrimeNumbersScreen()
+//}
 
 @Composable
 fun FibonacciNumbersScreen() {

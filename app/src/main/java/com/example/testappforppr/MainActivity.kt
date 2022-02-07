@@ -61,11 +61,10 @@ fun MainScreen() {
 fun TopBar() {
     TopAppBar(
         title = {
-            Row(modifier = Modifier.fillMaxWidth()) {
+            Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
                 Text(
                     text = "Test App for PPR from Shamsutov Adel",
                     fontSize = 18.sp,
-                    textAlign = TextAlign.Right,
                     style = MaterialTheme.typography.body1
                 )
             }
@@ -108,129 +107,5 @@ fun Tabs(tabs: List<TabItem>, pagerState: PagerState) {
 fun TabsContent(tabs: List<TabItem>, pagerState: PagerState) {
     HorizontalPager(state = pagerState) { page ->
         tabs[page].screen()
-    }
-}
-
-
-@ExperimentalFoundationApi
-@Composable
-fun MyPrimeNumbers1() {
-    var t: ArrayList<Int> = arrayListOf()
-
-    fun isPrime(n: Int): Boolean {
-        if (n < 2) return false // Необходимо, так как 1 -- не простое число
-        for (m in 2..sqrt(n.toDouble()).toInt()) {
-            if (n % m == 0) return false
-        }
-        return true
-    }
-    for (i in 0..100) {
-        if (isPrime(i)) t.add(i)
-    }
-    LazyVerticalGrid(
-        cells = GridCells.Fixed(2)
-    )
-    {
-        items(t) {
-            if (isPrime(it)) {
-                Card(
-                    modifier = Modifier
-                        .padding(4.dp),
-                    backgroundColor = Color.LightGray
-                ) {
-                    Text(
-                        text = it.toString(),
-                        fontSize = 24.sp,
-                        textAlign = TextAlign.Center,
-                        modifier = Modifier.padding(24.dp)
-                    )
-                }
-            }
-        }
-    }
-}
-
-@Composable
-fun MyPrimeNumbers() {
-    var primeNumber = 2
-
-    fun isPrime(n: Int): Boolean {
-        if (n < 2) return false // Необходимо, так как 1 -- не простое число
-        for (m in 2..sqrt(n.toDouble()).toInt()) {
-            if (n % m == 0) return false
-        }
-        return true
-    }
-
-    fun getNextPrimeNumber(): Boolean {
-        primeNumber++
-        while (!isPrime(primeNumber)) primeNumber++
-        return true
-    }
-    LazyColumn {
-        items(Int.MAX_VALUE) {
-            if (isPrime(it)) {
-                var numOfCell = it
-                LazyRow(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceAround
-                ) {
-                    items(2) {
-                        Card(
-                            modifier = Modifier
-                                .padding(4.dp)
-                                .width(180.dp),
-                            backgroundColor = Color.LightGray
-                        ) {
-//                            getNextPrimeNumber()
-                            Text(
-                                text = "numOfCell  = $numOfCell , PNum = $primeNumber",
-                                fontSize = 24.sp,
-                                textAlign = TextAlign.Center,
-                                modifier = Modifier.padding(24.dp)
-                            )
-                            getNextPrimeNumber()
-                        }
-                    }
-                }
-            }
-        }
-    }
-}
-
-@Composable
-fun MyFibonacciNumbers() {
-    var t1: Long = 0
-    var t2: Long = 1
-
-    fun nextFibo() {
-        if (t2 >= 0) {
-            val sum = t1 + t2
-            t1 = t2
-            t2 = sum
-        } else {
-            t1 = 0
-            t2 = 1
-        }
-    }
-
-    LazyColumn {
-        items(Float.POSITIVE_INFINITY.toInt()) {
-            if (t1 < 0) {
-                Text(
-                    "Конец! Даже Long больше не вмещает!",
-                    style = MaterialTheme.typography.h3,
-                    modifier = Modifier.padding(10.dp)
-                )
-            } else {
-                Text(
-                    "Item: $it, Fib: $t1",
-                    style = MaterialTheme.typography.h3,
-                    modifier = Modifier.padding(10.dp)
-                )
-                Divider(color = Color.Black, thickness = 5.dp)
-                nextFibo()
-            }
-        }
     }
 }
