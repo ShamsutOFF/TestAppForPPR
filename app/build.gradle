@@ -60,9 +60,11 @@ dependencies {
     implementation "androidx.compose.ui:ui-tooling-preview:$compose_version"
     implementation "androidx.navigation:navigation-compose:2.5.0-alpha01"
     implementation 'androidx.activity:activity-compose:1.4.0'
+    // Paging Compose
+    implementation "androidx.paging:paging-compose:1.0.0-alpha14"
     // Accompanist
-    implementation "com.google.accompanist:accompanist-pager:0.14.0" // Pager
-    implementation "com.google.accompanist:accompanist-pager-indicators:0.14.0" // Pager Indicators
+    implementation "com.google.accompanist:accompanist-pager:0.24.1-alpha" // Pager
+    implementation "com.google.accompanist:accompanist-pager-indicators:0.24.1-alpha" // Pager Indicators
 
     // Koin AndroidX Scope features
     implementation "org.koin:koin-androidx-scope:2.2.1"
