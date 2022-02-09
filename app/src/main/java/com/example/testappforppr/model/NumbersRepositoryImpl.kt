@@ -6,12 +6,14 @@ import kotlin.math.sqrt
 private const val TAG = "@@@ NumbersRepositoryImpl"
 
 class NumbersRepositoryImpl : NumbersRepository {
-    var a: Int = 0
-    var b: Int = 200
+//    var a: Int = 0
+//    var b: Int = 200
     override suspend fun getPrimeNumbers(page: Int): List<Int> {
         Log.d(TAG, "getPrimeNumbers() called with: page = $page")
+    val b: Int = page*200
+    val a: Int = b-199
 
-        var list: ArrayList<Int> = arrayListOf()
+        val list: ArrayList<Int> = arrayListOf()
 
         fun isPrime(n: Int): Boolean {
             if (n < 2) return false // Необходимо, так как 1 -- не простое число
@@ -25,15 +27,17 @@ class NumbersRepositoryImpl : NumbersRepository {
                 list.add(i)
             }
         }
-        a = b
-        b += 200
+//        a = b
+//        b += 200
         return list
     }
 
     override suspend fun getFibonacciNumbers(page: Int): List<Long> {
         Log.d(TAG, "getFibonacciNumbers() called with: page = $page")
+        val b: Int = page*200
+        val a: Int = b-199
 
-        var list: ArrayList<Long> = arrayListOf()
+        val list: ArrayList<Long> = arrayListOf()
         var l1: Long = 1
         var l2: Long = 2
 
@@ -52,8 +56,8 @@ class NumbersRepositoryImpl : NumbersRepository {
         for (i in a..b) {
             list.add(nextFibo())
         }
-        a = b
-        b += 200
+//        a = b
+//        b += 200
         return list
     }
 }
