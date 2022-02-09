@@ -1,15 +1,15 @@
 package com.example.testappforppr.model
 
 import android.util.Log
+import java.math.BigInteger
 import kotlin.math.sqrt
 
 private const val TAG = "@@@ NumbersRepositoryImpl"
 
 class NumbersRepositoryImpl : NumbersRepository {
     override suspend fun getPrimeNumbers(page: Int): List<Int> {
-        Log.d(TAG, "getPrimeNumbers() called with: page = $page")
-    val b: Int = page*200
-    val a: Int = b-199
+        val b: Int = page * 20
+        val a: Int = b - 19
 
         val list: ArrayList<Int> = arrayListOf()
 
@@ -27,26 +27,19 @@ class NumbersRepositoryImpl : NumbersRepository {
         }
         return list
     }
+    var b1: BigInteger = BigInteger.valueOf(1)
+    var b2: BigInteger = BigInteger.valueOf(2)
 
-    override suspend fun getFibonacciNumbers(page: Int): List<Long> {
-        Log.d(TAG, "getFibonacciNumbers() called with: page = $page")
-        val b: Int = page*200
-        val a: Int = b-199
+    override suspend fun getFibonacciNumbers(page: Int): List<BigInteger> {
 
-        val list: ArrayList<Long> = arrayListOf()
-        var l1: Long = 1
-        var l2: Long = 2
+        val b: Int = page * 20
+        val a: Int = b - 19
 
-        fun nextFibo(): Long {
-            var sum = l1 + l2
-            if (sum >= 0) {
-                l1 = l2
-                l2 = sum
-            } else {
-                l1 = 1
-                l2 = 2
-                sum = 3
-            }
+        val list: ArrayList<BigInteger> = arrayListOf()
+        fun nextFibo(): BigInteger {
+            var sum = b1 + b2
+            b1 = b2
+            b2 = sum
             return sum
         }
         for (i in a..b) {

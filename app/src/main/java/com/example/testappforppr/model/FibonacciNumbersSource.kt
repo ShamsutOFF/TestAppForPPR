@@ -2,9 +2,10 @@ package com.example.testappforppr.model
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
+import java.math.BigInteger
 
-class FibonacciNumbersSource(private val numbersRepository: NumbersRepository) : PagingSource<Int, Long>() {
-    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Long> {
+class FibonacciNumbersSource(private val numbersRepository: NumbersRepository) : PagingSource<Int, BigInteger>() {
+    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, BigInteger> {
         return try {
             val page = params.key ?: 1
             val numbersResponse = numbersRepository.getFibonacciNumbers(page = page)
@@ -19,7 +20,7 @@ class FibonacciNumbersSource(private val numbersRepository: NumbersRepository) :
         }
     }
 
-    override fun getRefreshKey(state: PagingState<Int, Long>): Int? {
+    override fun getRefreshKey(state: PagingState<Int, BigInteger>): Int? {
         return null
     }
 }

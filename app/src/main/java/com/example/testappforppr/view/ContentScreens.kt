@@ -9,6 +9,7 @@ import androidx.paging.PagingData
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import kotlinx.coroutines.flow.Flow
+import java.math.BigInteger
 
 @ExperimentalFoundationApi
 @Composable
@@ -22,16 +23,16 @@ fun PrimeNumbersScreen(primeNumbers: Flow<PagingData<Int>>) {
             lazyNumbersItems[index]?.let {
                 when (index % 4) {
                     0 -> {
-                        NumberCardItem(number = it.toLong(), cardColor = cellColor1)
+                        PrimeNumberCardItem(number = it, cardColor = cellColor1)
                     }
                     1 -> {
-                        NumberCardItem(number = it.toLong(), cardColor = cellColor2)
+                        PrimeNumberCardItem(number = it, cardColor = cellColor2)
                     }
                     2 -> {
-                        NumberCardItem(number = it.toLong(), cardColor = cellColor2)
+                        PrimeNumberCardItem(number = it, cardColor = cellColor2)
                     }
                     3 -> {
-                        NumberCardItem(number = it.toLong(), cardColor = cellColor1)
+                        PrimeNumberCardItem(number = it, cardColor = cellColor1)
                     }
                 }
             }
@@ -41,8 +42,8 @@ fun PrimeNumbersScreen(primeNumbers: Flow<PagingData<Int>>) {
 
 @ExperimentalFoundationApi
 @Composable
-fun FibonacciNumbersScreen(fibonacciNumbers: Flow<PagingData<Long>>) {
-    val lazyNumbersItems: LazyPagingItems<Long> = fibonacciNumbers.collectAsLazyPagingItems()
+fun FibonacciNumbersScreen(fibonacciNumbers: Flow<PagingData<BigInteger>>) {
+    val lazyNumbersItems: LazyPagingItems<BigInteger> = fibonacciNumbers.collectAsLazyPagingItems()
     val cellColor1 = Color.LightGray
     val cellColor2 = Color.White
 
@@ -51,16 +52,16 @@ fun FibonacciNumbersScreen(fibonacciNumbers: Flow<PagingData<Long>>) {
             lazyNumbersItems[index]?.let {
                 when (index % 4) {
                     0 -> {
-                        NumberCardItem(number = it, cardColor = cellColor1)
+                        FibonacciNumberCardItem(number = it, cardColor = cellColor1)
                     }
                     1 -> {
-                        NumberCardItem(number = it, cardColor = cellColor2)
+                        FibonacciNumberCardItem(number = it, cardColor = cellColor2)
                     }
                     2 -> {
-                        NumberCardItem(number = it, cardColor = cellColor2)
+                        FibonacciNumberCardItem(number = it, cardColor = cellColor2)
                     }
                     3 -> {
-                        NumberCardItem(number = it, cardColor = cellColor1)
+                        FibonacciNumberCardItem(number = it, cardColor = cellColor1)
                     }
                 }
             }
