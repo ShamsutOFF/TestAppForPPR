@@ -6,8 +6,6 @@ import kotlin.math.sqrt
 private const val TAG = "@@@ NumbersRepositoryImpl"
 
 class NumbersRepositoryImpl : NumbersRepository {
-//    var a: Int = 0
-//    var b: Int = 200
     override suspend fun getPrimeNumbers(page: Int): List<Int> {
         Log.d(TAG, "getPrimeNumbers() called with: page = $page")
     val b: Int = page*200
@@ -27,8 +25,6 @@ class NumbersRepositoryImpl : NumbersRepository {
                 list.add(i)
             }
         }
-//        a = b
-//        b += 200
         return list
     }
 
@@ -56,8 +52,6 @@ class NumbersRepositoryImpl : NumbersRepository {
         for (i in a..b) {
             list.add(nextFibo())
         }
-//        a = b
-//        b += 200
         return list
     }
 }
