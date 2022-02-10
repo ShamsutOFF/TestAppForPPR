@@ -3,9 +3,10 @@ package com.example.testappforppr.model
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.example.testappforppr.model.NumbersRepository
+import java.math.BigInteger
 
-class PrimeNumbersSource(private val numbersRepository: NumbersRepository) : PagingSource<Int, Int>() {
-    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Int> {
+class PrimeNumbersSource(private val numbersRepository: NumbersRepository) : PagingSource<Int, BigInteger>() {
+    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, BigInteger> {
         return try {
             val page = params.key ?: 1
             val numbersResponse = numbersRepository.getPrimeNumbers(page = page)
@@ -20,7 +21,7 @@ class PrimeNumbersSource(private val numbersRepository: NumbersRepository) : Pag
         }
     }
 
-    override fun getRefreshKey(state: PagingState<Int, Int>): Int? {
+    override fun getRefreshKey(state: PagingState<Int, BigInteger>): Int? {
         return null
     }
 }

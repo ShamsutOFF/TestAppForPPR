@@ -1,17 +1,14 @@
 package com.example.testappforppr.model
 
-import android.util.Log
 import java.math.BigInteger
 import kotlin.math.sqrt
 
-private const val TAG = "@@@ NumbersRepositoryImpl"
-
 class NumbersRepositoryImpl : NumbersRepository {
-    override suspend fun getPrimeNumbers(page: Int): List<Int> {
-        val b: Int = page * 20
-        val a: Int = b - 19
+    override suspend fun getPrimeNumbers(page: Int): List<BigInteger> {
+        val b: Int = page * 200
+        val a: Int = b - 199
 
-        val list: ArrayList<Int> = arrayListOf()
+        val list: ArrayList<BigInteger> = arrayListOf()
 
         fun isPrime(n: Int): Boolean {
             if (n < 2) return false // Необходимо, так как 1 -- не простое число
@@ -22,11 +19,12 @@ class NumbersRepositoryImpl : NumbersRepository {
         }
         for (i in a..b) {
             if (isPrime(i)) {
-                list.add(i)
+                list.add(i.toBigInteger())
             }
         }
         return list
     }
+
     var b1: BigInteger = BigInteger.valueOf(1)
     var b2: BigInteger = BigInteger.valueOf(2)
 

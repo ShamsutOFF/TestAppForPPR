@@ -17,26 +17,8 @@ import androidx.compose.ui.unit.dp
 import java.math.BigInteger
 
 @Composable
-fun PrimeNumberCardItem(number: Int, cardColor: Color) {
+fun NumberCardItem(number: BigInteger, cardColor: Color) {
     Card(modifier = Modifier
-//        .padding(4.dp)
-        .fillMaxSize(),
-        elevation = 10.dp,
-        backgroundColor = cardColor) {
-        Box(contentAlignment = Alignment.Center,
-            modifier = Modifier.fillMaxSize()) {
-            Text(text = number.toString(),
-                style = MaterialTheme.typography.h5,
-                overflow = TextOverflow.Ellipsis
-            )
-        }
-    }
-}
-
-@Composable
-fun FibonacciNumberCardItem(number: BigInteger, cardColor: Color) {
-    Card(modifier = Modifier
-//        .padding(4.dp)
         .fillMaxSize(),
         elevation = 10.dp,
         backgroundColor = cardColor) {
