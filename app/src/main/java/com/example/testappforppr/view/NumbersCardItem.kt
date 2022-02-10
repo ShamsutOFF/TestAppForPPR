@@ -11,20 +11,21 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import java.math.BigInteger
 
 @Composable
-fun NumberCardItem(number: Long, cardColor: Color) {
+fun NumberCardItem(number: BigInteger, cardColor: Color) {
     Card(modifier = Modifier
-        .padding(4.dp)
         .fillMaxSize(),
         elevation = 10.dp,
         backgroundColor = cardColor) {
         Box(contentAlignment = Alignment.Center,
-            modifier = Modifier.fillMaxSize().height(100.dp)) {
+            modifier = Modifier.fillMaxSize()) {
             Text(text = number.toString(),
-                style = MaterialTheme.typography.h3,
+                style = MaterialTheme.typography.h5,
                 overflow = TextOverflow.Ellipsis
             )
         }
