@@ -33,7 +33,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            HorizontalPager(mainViewModel)
+            MainScreen(mainViewModel)
         }
     }
 }
@@ -41,7 +41,7 @@ class MainActivity : ComponentActivity() {
 @ExperimentalFoundationApi
 @ExperimentalPagerApi
 @Composable
-fun HorizontalPager(mainViewModel: MainViewModel) {
+fun MainScreen(mainViewModel: MainViewModel) {
     val pagerState = rememberPagerState(0)
     val scope = rememberCoroutineScope()
     val scaffoldState = rememberScaffoldState()
